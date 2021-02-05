@@ -37,3 +37,14 @@ function local_callbacks_coursemodule_standard_elements($formwrapper, $mform) {
         $mform->setType('examplefield', PARAM_RAW);
     }
 }
+/**
+ * Process data from submitted form
+ *
+ * @param stdClass $data
+ * @param stdClass $course
+ * @return void
+ */
+function local_callbacks_coursemodule_edit_post_actions($data, $course) {
+}
+
+
