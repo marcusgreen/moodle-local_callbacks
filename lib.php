@@ -16,7 +16,11 @@
 
 /**
  * Plugin internal classes, functions and constants are defined here.
- *
+ * This code puts the new fields at the end of the form. They can be
+ * inserted elsewhere in the form with code like this
+ * $examplefield = $mform->createElement('text', 'examplefield', get_string('examplefieldlabel', 'local_callbacks'));
+ * $mform->insertElementBefore($examplefield, 'showdescription');
+
  * @package     local_callbacks
  * @copyright   2021 Marcus Green
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -37,9 +41,10 @@ function local_callbacks_coursemodule_standard_elements($formwrapper, $mform) {
         $mform->addElement('header', 'exampleheader', get_string('exampleheader', 'local_callbacks'));
         $mform->addElement('text', 'examplefield', get_string('examplefieldlabel', 'local_callbacks'));
         $mform->setType('examplefield', PARAM_RAW);
-        // Populate with $mform->setdefault('examplefield', $existing['examplefield']);
+        // Populate with $mform->setdefault('examplefield', $existing['examplefield']);.
     }
 }
+
 /**
  * Process data from submitted form
  *
