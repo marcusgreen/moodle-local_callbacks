@@ -27,4 +27,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['examplefieldlabel'] = 'Example field';
 $string['exampleheader'] = 'Example header';
+$string['callbacks'] = 'Callbacks';
+
 

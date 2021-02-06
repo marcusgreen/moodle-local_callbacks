@@ -17,10 +17,10 @@
 /**
  * Plugin internal classes, functions and constants are defined here.
  * This code puts the new fields at the end of the form. They can be
- * inserted elsewhere in the form with code like this
+ * inserted elsewhere with code like this, which puts the field
+ * before the description field.
  * $examplefield = $mform->createElement('text', 'examplefield', get_string('examplefieldlabel', 'local_callbacks'));
- * $mform->insertElementBefore($examplefield, 'showdescription');
-
+ * $mform->insertElementBefore($examplefield, 'introeditor');
  * @package     local_callbacks
  * @copyright   2021 Marcus Green
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -35,7 +35,8 @@ defined('MOODLE_INTERNAL') || die();
  */
 function local_callbacks_coursemodule_standard_elements($formwrapper, $mform) {
     // Call code to get examplefield from database
-    // For example $existing = get_existing($coursemodule);.
+    // For example $existing = get_existing($coursemodule);
+    // You have to write get_existing.
     $modulename = $formwrapper->get_current()->modulename;
     if ($modulename == 'assign') {
         $mform->addElement('header', 'exampleheader', get_string('exampleheader', 'local_callbacks'));
