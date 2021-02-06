@@ -30,11 +30,14 @@ defined('MOODLE_INTERNAL') || die();
  * https://docs.moodle.org/dev/Callbacks
  */
 function local_callbacks_coursemodule_standard_elements($formwrapper, $mform) {
-    $modulename = $formwrapper->get_current()->modulename;
+    $coursemodule = $formwrapper->get_coursemodule();
+    // Call code to get examplefield from database
+    // For example $existing = get_existing($coursemodule);.
     if ($modulename == 'assign') {
         $mform->addElement('header', 'exampleheader', get_string('exampleheader', 'local_callbacks'));
         $mform->addElement('text', 'examplefield', get_string('examplefieldlabel', 'local_callbacks'));
         $mform->setType('examplefield', PARAM_RAW);
+        // Populate with $mform->setdefault('examplefield', $existing['examplefield']);.
     }
 }
 /**
@@ -45,6 +48,7 @@ function local_callbacks_coursemodule_standard_elements($formwrapper, $mform) {
  * @return void
  */
 function local_callbacks_coursemodule_edit_post_actions($data, $course) {
+    // Pull apart $data and insert/update the database table.
 }
 
 
