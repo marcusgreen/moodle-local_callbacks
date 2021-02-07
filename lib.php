@@ -32,6 +32,10 @@ defined('MOODLE_INTERNAL') || die();
  * @param moodleform $formwrapper The moodle quickforms wrapper object.
  * @param MoodleQuickForm $mform The actual form object (required to modify the form).
  * https://docs.moodle.org/dev/Callbacks
+ * This function name depends on which plugin is implementing it. So if you were
+ * implementing mod_wordsquare
+ * This function would be called wordsquare_coursemodule_standard_elements
+ * (the mod is assumed for course activities)
  */
 function local_callbacks_coursemodule_standard_elements($formwrapper, $mform) {
     // Call code to get examplefield from database
@@ -52,9 +56,20 @@ function local_callbacks_coursemodule_standard_elements($formwrapper, $mform) {
  * @param stdClass $data
  * @param stdClass $course
  * @return void
+ * See plugin_extend_coursemodule_edit_post_actions in
+ * https://github.com/moodle/moodle/blob/master/course/modlib.php
  */
 function local_callbacks_coursemodule_edit_post_actions($data, $course) {
     // Pull apart $data and insert/update the database table.
 }
 
-
+/**
+ * Validate the data in the new field when the form is submitted
+ *
+ * @param moodleform_mod $fromform
+ * @param array $fields
+ * @return void
+ */
+function local_callbacks_coursemodule_validation($fromform, $fields) {
+    \core\notification::add($fields['examplefield'], \core\notification::INFO);
+}
