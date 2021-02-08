@@ -71,5 +71,7 @@ function local_callbacks_coursemodule_edit_post_actions($data, $course) {
  * @return void
  */
 function local_callbacks_coursemodule_validation($fromform, $fields) {
-    \core\notification::add($fields['examplefield'], \core\notification::INFO);
+    if (get_class($fromform) == 'mod_assign_mod_form') {
+     \core\notification::add($fields['examplefield'], \core\notification::INFO);
+    }
 }
