@@ -28,6 +28,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+function local_callbacks_before_standard_html_head() {
+    global $PAGE;
+    if ($PAGE->pagetype == "mod-quiz-attempt") {
+        $cmid = $PAGE->url->params()['cmid'];
+    }
+}
 /**
  * @param moodleform $formwrapper The moodle quickforms wrapper object.
  * @param MoodleQuickForm $mform The actual form object (required to modify the form).
