@@ -29,9 +29,18 @@
 defined('MOODLE_INTERNAL') || die();
 
 function local_callbacks_before_standard_html_head() {
-    global $PAGE;
+    global $PAGE, $DB;
+    xdebug_break();
     if ($PAGE->pagetype == "mod-quiz-attempt") {
         $cmid = $PAGE->url->params()['cmid'];
+        $sql = 'SELECT *
+                  FROM {tag_instance} ti
+                  JOIN {tag} tag
+                    ON ti.tagid=tag.id
+                 WHERE ti.itemid=:itemid
+                   AND tag.name = "callback"';
+        $tag = $DB->get_records_sql($sql, ['itemid' => $cmid]);
+        $x = 1;
     }
 }
 /**
