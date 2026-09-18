@@ -28,21 +28,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-function local_callbacks_before_standard_html_head() {
-    global $PAGE, $DB;
-    xdebug_break();
-    if ($PAGE->pagetype == "mod-quiz-attempt") {
-        $cmid = $PAGE->url->params()['cmid'];
-        $sql = 'SELECT *
-                  FROM {tag_instance} ti
-                  JOIN {tag} tag
-                    ON ti.tagid=tag.id
-                 WHERE ti.itemid=:itemid
-                   AND tag.name = "callback"';
-        $tag = $DB->get_records_sql($sql, ['itemid' => $cmid]);
-        $x = 1;
-    }
-}
 /**
  * @param moodleform $formwrapper The moodle quickforms wrapper object.
  * @param MoodleQuickForm $mform The actual form object (required to modify the form).
@@ -70,12 +55,13 @@ function local_callbacks_coursemodule_standard_elements($formwrapper, $mform) {
  *
  * @param stdClass $data
  * @param stdClass $course
- * @return void
+ * @return stdClass $data, which is passed on to the next plugin's callback
  * See plugin_extend_coursemodule_edit_post_actions in
- * https://github.com/moodle/moodle/blob/master/course/modlib.php
+ * https://github.com/moodle/moodle/blob/main/public/course/modlib.php
  */
 function local_callbacks_coursemodule_edit_post_actions($data, $course) {
     // Pull apart $data and insert/update the database table.
+    return $data;
 }
 
 /**
